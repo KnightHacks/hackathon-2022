@@ -17,7 +17,6 @@ npm install
 To run a live development server, run the following in a terminal:
 
 ```shell
-cd frontend
 npm run start
 ```
 
