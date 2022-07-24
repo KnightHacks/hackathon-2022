@@ -9,6 +9,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Home from "./pages/Home";
+import Sponsors from "./pages/Sponsors";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Sponsors" element={<Sponsors />} />
         </Routes>
       </BrowserRouter>
     </div>
