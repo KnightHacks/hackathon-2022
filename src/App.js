@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Sponsors" element={<Sponsors />} />
-          <Route path="/" element={<About />} />
+          <Route path="/About" element={<About />} />
         </Routes>
       </BrowserRouter>
     </div>
