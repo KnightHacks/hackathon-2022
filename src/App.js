@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
+import Sponsors from "./pages/Sponsors";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Schedule" element={<Schedule />} />
+          <Route path="/Sponsors" element={<Sponsors />} />
         </Routes>
       </BrowserRouter>
     </div>
