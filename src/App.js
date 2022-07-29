@@ -11,6 +11,7 @@ import {
 import Home from "./pages/Home";
 import Schedule from "./pages/Schedule";
 import Sponsors from "./pages/Sponsors";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Schedule" element={<Schedule />} />
           <Route path="/Sponsors" element={<Sponsors />} />
+          <Route path="/About" element={<About />} />
         </Routes>
       </BrowserRouter>
     </div>
