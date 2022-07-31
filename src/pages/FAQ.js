@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function About() {
+export default function FAQ() {
   return (
     <div className="flex h-screen bg-black">
       <div className="bg-white h-5/6 w-2/3 object-center mx-auto self-center rounded-xl p-10">
