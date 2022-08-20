@@ -1,16 +1,20 @@
-# build environment
-FROM node:13.12.0-alpine as build
+FROM node:18 AS build-env
 WORKDIR /app
-ENV PATH /app/node_modules/.bin:$PATH
+
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm ci --silentxs
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm ci --omit=dev
+
 COPY . ./
 RUN npm run build
 
-# production environment
-FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 3000
-CMD ["nginx", "-g", "daemon off;"]
+# stage - release ############
+FROM abdennour/nginx-distroless-unprivileged as release
+# workdir is the same as root directive in the nginx custom config.
+WORKDIR /app
+# copy custom nginx config from your host
+COPY ./default.conf /etc/nginx/conf.d
+# copy web assets from build stage above
+COPY --from=build-env /app/build/. ./
+# expose is the same as listen directive in the nginx custom config.
+EXPOSE 9090
