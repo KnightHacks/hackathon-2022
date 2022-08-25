@@ -13,6 +13,7 @@ import Schedule from "./pages/Schedule";
 import Sponsors from "./pages/Sponsors";
 import About from "./pages/About";
 import FAQ from "./pages/FAQ";
+import Attributions from "./pages/Attributions";
 
 function App() {
   return (
