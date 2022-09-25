@@ -6,7 +6,7 @@ import facebook from '../../assets/logo-facebook_1.svg';
 
 export default function ContentBox(props) {
   return (
-  <div className="bg-white h-5/6 w-2/3 object-center mx-auto self-center rounded-[36px] p-10">{/*rounded box*/}
+  <div className="bg-white h-5/6 w-1/2 object-center mx-auto self-center rounded-[36px] p-10">{/*rounded box*/}
     <div>{/* logo*/}
         <img></img>
     </div>
@@ -15,16 +15,16 @@ export default function ContentBox(props) {
     </div>
     <div className='flex flex-row justify-center pt-3'>{/* footer social icons*/} 
         <div className="px-6">
-          <img src={insta} className='h-12 w-12 flex-initial'></img>
+          <button><img src={insta} className='h-12 w-12 flex-initial'></img></button>
         </div>
         <div className="px-6">
-          <img src={twitter} className='h-12 w-12 flex-initial'></img>
+          <button><img src={twitter} className='h-12 w-12 flex-initial'></img></button>
         </div>
         <div className="px-6">
-          <img src={facebook} className='h-12 w-12 flex-initial'></img>
+          <button><img src={facebook} className='h-12 w-12 flex-initial'></img></button>
         </div>
         <div className="px-6">
-          <img src={discord} className='h-12 w-12 flex-initial'></img>
+          <button><img src={discord} className='h-12 w-12 flex-initial'></img></button>
         </div>
     </div>
   </div>
