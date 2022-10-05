@@ -29,10 +29,10 @@ class MusicCompenent extends React.Component {
     } 
 
     render() {
-        Howler.volume(1.0)
+        Howler.volume(0)
         return (
             <div>
-                <img id="speaker" width={25} height={25} src={speaker} onClick={this.changeIcon}/>
+                <img id="speaker" width={25} height={25} src={muted} onClick={this.changeIcon}/>
             </div>
         );
     }
