@@ -10,7 +10,7 @@ export default function ContentBox(props) {
     <div>{/* logo*/}
         <img></img>
     </div>
-    <div className="overflow-y-auto h-[675px]">{/* text box*/}
+    <div className="overflow-y-auto h-5/6">{/* text box*/}
     {props.children}
     </div>
     <div className='flex flex-row justify-center pt-3'>{/* footer social icons*/} 
