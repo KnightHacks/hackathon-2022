@@ -79,8 +79,8 @@ function Sidebar(props) {
                     Today's Specials
                   </h2>
                   {props.children}
-                  <div className="flex justify-end w-full mt-16">
-                    <img src={ChalkMessage} className="w-2/6" />
+                  <div className="flex justify-end w-full mt-10">
+                    <img src={ChalkMessage} className="w-24" />
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

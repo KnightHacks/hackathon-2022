@@ -22,40 +22,48 @@ function App() {
     <div className="">
       <BrowserRouter>
         <Sidebar>
-          <div className="mt-8 ">
+          <div className="mt-6 ">
             <Link to="/">
               <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
                 Home
               </h1>
             </Link>
           </div>
-          <div className="mt-8">
+          <div className="mt-6">
             <Link to="/about">
               <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
                 About
               </h1>
             </Link>
           </div>
-          <div className="mt-8">
+          <div className="mt-6">
             <Link to="/sponsors">
               <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
                 Sponsors
               </h1>
             </Link>
           </div>
-          <div className="mt-8">
+          <div className="mt-6">
             <Link to="/schedule">
               <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
                 Schedule
               </h1>
             </Link>
           </div>
-          <div className="mt-8">
+          <div className="mt-6">
             <Link to="/faq">
               <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
                 FAQ
               </h1>
             </Link>
+          </div>
+          <div className="flex w-full justify-center gap-4 mt-8 border-chalkborder border-b-4 pb-1">
+            <button className="bg-eraser px-6 py-2 rounded-lg font-bold skew-y-0 hover:skew-y-2 hover:drop-shadow-eraser">
+              Register Now
+            </button>
+            <button className="bg-eraser px-6 py-2 rounded-lg font-bold -skew-y-0 hover:-skew-y-2 hover:drop-shadow-eraserTwo">
+              Hacker Dashboard
+            </button>
           </div>
         </Sidebar>
         <Routes>
