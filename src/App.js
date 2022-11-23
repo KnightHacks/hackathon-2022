@@ -58,10 +58,10 @@ function App() {
             </Link>
           </div>
           <div className="flex w-full justify-center gap-4 mt-8 border-chalkborder border-b-4 pb-1">
-            <button className="bg-eraser px-6 py-2 rounded-lg font-bold skew-y-0 hover:skew-y-2 hover:drop-shadow-eraser">
+            <button className="bg-eraser px-6 py-2 rounded-lg font-bold skew-y-0 hover:skew-y-2 eraserOne">
               Register Now
             </button>
-            <button className="bg-eraser px-6 py-2 rounded-lg font-bold -skew-y-0 hover:-skew-y-2 hover:drop-shadow-eraserTwo">
+            <button className="bg-eraser px-6 py-2 rounded-lg font-bold -skew-y-0 hover:-skew-y-2 eraserTwo">
               Hacker Dashboard
             </button>
           </div>
