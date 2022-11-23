@@ -14,18 +14,56 @@ import Sponsors from "./pages/Sponsors";
 import About from "./pages/About";
 import FAQ from "./pages/FAQ";
 import Attributions from "./pages/Attributions";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Content from "./pages/Content";
 
 function App() {
   return (
     <div className="">
       <BrowserRouter>
+        <Sidebar>
+          <div className="mt-8 ">
+            <Link to="/">
+              <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
+                Home
+              </h1>
+            </Link>
+          </div>
+          <div className="mt-8">
+            <Link to="/about">
+              <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
+                About
+              </h1>
+            </Link>
+          </div>
+          <div className="mt-8">
+            <Link to="/sponsors">
+              <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
+                Sponsors
+              </h1>
+            </Link>
+          </div>
+          <div className="mt-8">
+            <Link to="/schedule">
+              <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
+                Schedule
+              </h1>
+            </Link>
+          </div>
+          <div className="mt-8">
+            <Link to="/faq">
+              <h1 className="text-4xl text-white font-medium font-cursive hover:underline">
+                FAQ
+              </h1>
+            </Link>
+          </div>
+        </Sidebar>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Schedule" element={<Schedule />} />
-          <Route path="/Sponsors" element={<Sponsors />} />
-          <Route path="/Attributions" element={<Attributions />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/Schedule" element={<Content page="schedule" />} />
+          <Route path="/Sponsors" element={<Content page="sponsors" />} />
+          <Route path="/About" element={<Content page="about" />} />
+          <Route path="/FAQ" element={<Content page="faq" />} />
         </Routes>
       </BrowserRouter>
     </div>

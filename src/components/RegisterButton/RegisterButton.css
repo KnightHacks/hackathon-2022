@@ -1,0 +1,61 @@
+  .neon-container:hover{
+    border: 10px #5d5d5d solid;
+    box-shadow: 1px 0px 4px #1c1c1c, 2px 0px 4px #1c1c1c, 3px 0px 4px #1c1c1c, 2px 0px 3px #1c1c1c, 2px 3px 5px #1c1c1c, 2px 0px 5px, 5px 0px 5px, 5px 0vw 200px #1c1c1c,2px 0vw 3px #1c1c1c;
+  }
+  
+  .neon-container:hover .neon{
+    color: black;
+    text-shadow: -4px 0 #5d5d5d, 0 4px #5d5d5d, 4px 0 #5d5d5d, 0 -4px #5d5d5d;
+  }
+  
+  .neon-container:hover .flicker-slower{
+    animation: none
+  }
+  
+  .neon-container:hover .flicker-slow{
+    animation: none
+  }
+  
+  .neon-container:hover .flicker-fast{
+    animation: none
+  }
+  
+  .neon-container{
+    box-shadow: 1px 0px 4px #f1f283, 2px 0px 4px #f1f283, 3px 0px 4px #f1f283, 2px 0px 3px #f1f283, 2px 3px 5px #f1f283, 2px 0px 5px, 5px 0px 5px, 5px 0vw 200px #f1f283,2px 0vw 3px #f1f283;
+    border-radius: 300px / 150px;
+    transform: translate(-50%, -50%);
+    text-shadow: 1px 0px 4px #f1f283, 2px 0px 4px #f1f283, 3px 0px 4px #f1f283, 2px 0px 3px #f1f283, 2px 3px 15px #f1f283, 2px 0px 15px, 5px 0px 105px, 20px 0vw 200px #f1f283,40px 0vw 120px #f1f283;
+  }
+  
+  .flicker-slow{
+    animation: flicker 3s linear infinite;
+  }
+  
+  .flicker-slower{
+    animation: flicker-less 6s linear infinite;
+  }
+  
+  .flicker-fast{
+    animation: flicker 1s linear infinite;
+  }
+  
+  @keyframes flicker {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+      opacity: .99;
+          
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+          opacity: 0.4;
+      }
+  }
+  
+  @keyframes flicker-less {
+      0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+      opacity: .99;
+          
+      }
+      20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+          opacity: 0.8;
+      }
+  }
+  
