@@ -41,6 +41,10 @@
   
   @keyframes flicker {
       0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+<<<<<<< HEAD
+=======
+          //text-shadow: none;
+>>>>>>> c99d03cbaa96b58af6d07bcb1d3d6d7cd92fcdf7
       opacity: .99;
           
       }
@@ -51,6 +55,10 @@
   
   @keyframes flicker-less {
       0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% {
+<<<<<<< HEAD
+=======
+          //text-shadow: none;
+>>>>>>> c99d03cbaa96b58af6d07bcb1d3d6d7cd92fcdf7
       opacity: .99;
           
       }

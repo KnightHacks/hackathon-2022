@@ -10,7 +10,11 @@
     "howler": "^2.2.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-icons": "^4.6.0",
+=======
+    "react-howler": "^5.2.0",
+>>>>>>> c99d03cbaa96b58af6d07bcb1d3d6d7cd92fcdf7
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
