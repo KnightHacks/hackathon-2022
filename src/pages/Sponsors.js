@@ -1,12 +1,11 @@
 import React from "react";
+import ContentBox from "../components/ContentBox/ContentBox";
 
 export default function Sponsors() {
   return (
-    <div className="flex h-screen bg-black">
-      <div className="bg-white h-5/6 w-2/3 object-center mx-auto self-center rounded-xl p-10">
-        <h1 className="text-center font-bold text-4xl">Sponsors</h1>
-      </div>
-    </div>
+    <ContentBox>
+      <h1 className="text-center font-bold text-4xl text-white">Sponsors</h1>
+    </ContentBox>
   );
 }
 
