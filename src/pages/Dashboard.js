@@ -180,12 +180,12 @@ export default function Dashboard() {
                             have.
                           </span>
                         </p>
-                        <button
+                        {/* <button
                           class="w-1/4 mt-2 bg-wallcolor hover:bg-wallcolordark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                           type="button"
                         >
                           Modify Application
-                        </button>
+                        </button> */}
                       </div>
                     )}
                     {userData.me.applications.filter(
