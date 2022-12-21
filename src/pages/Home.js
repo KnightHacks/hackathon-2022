@@ -16,6 +16,7 @@ export default function Home() {
       <div className="flex mt-0 justify-end w-full pr-64">
         <Stats />
       </div>
+      <div className="flex justify-center w-full"></div>
     </div>
   );
 }
