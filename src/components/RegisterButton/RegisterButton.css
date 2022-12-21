@@ -23,7 +23,6 @@
   .neon-container{
     box-shadow: 1px 0px 4px #f1f283, 2px 0px 4px #f1f283, 3px 0px 4px #f1f283, 2px 0px 3px #f1f283, 2px 3px 5px #f1f283, 2px 0px 5px, 5px 0px 5px, 5px 0vw 200px #f1f283,2px 0vw 3px #f1f283;
     border-radius: 300px / 150px;
-    transform: translate(-50%, -50%);
     text-shadow: 1px 0px 4px #f1f283, 2px 0px 4px #f1f283, 3px 0px 4px #f1f283, 2px 0px 3px #f1f283, 2px 3px 15px #f1f283, 2px 0px 15px, 5px 0px 105px, 20px 0vw 200px #f1f283,40px 0vw 120px #f1f283;
   }
   

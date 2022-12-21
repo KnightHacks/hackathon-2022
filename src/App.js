@@ -52,7 +52,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <div className="">
+      <div className="overflow-hidden">
         <BrowserRouter>
           <Sidebar>
             <div className="mt-6 ">
@@ -130,10 +130,12 @@ function App() {
             <Route path="/About" element={<Content page="about" />} />
             <Route path="/FAQ" element={<Content page="faq" />} />
             <Route path="/Register" element={<Content page="register" />} />
+            <Route path="/ModifyUser" element={<Content page="modifyuser" />} />
             <Route path="/Dashboard" element={<Content page="dashboard" />} />
             <Route path="/Apply" element={<Content page="apply" />} />
             <Route path="/Auth" element={<Content page="auth" />} />
             <Route path="/auth_redirect" element={<AuthRedirect />} />
+            <Route path="*" element={<Content page="notfound" />} />
           </Routes>
         </BrowserRouter>
         <Toaster />

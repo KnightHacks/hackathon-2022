@@ -80,8 +80,10 @@ export default function AuthRedirect() {
   }, []);
 
   return (
-    <div>
-      <h1>Auth Redirect</h1>
+    <div className="flex justify-center align-middle h-full">
+      <h1 className="flex align-middle mt-64 font-bold text-3xl">
+        Redirecting you to the Dashboard...
+      </h1>
     </div>
   );
 }

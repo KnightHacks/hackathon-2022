@@ -8,7 +8,7 @@ import { FaDiscord, FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function ContentBox(props) {
   return (
-    <div className="bg-zinc-700 opacity-90 h-5/6 w-2/3 object-center mx-auto self-center rounded-3xl p-10">
+    <div className="bg-zinc-700 opacity-90 h-5/6 w-11/12 md:3/4 mt-10 object-center mx-auto self-center rounded-3xl p-10">
       {/*rounded box*/}
       <div>
         {/* logo*/}
@@ -21,22 +21,36 @@ export default function ContentBox(props) {
       <div className="flex flex-row justify-center pt-12 ">
         {/* footer social icons*/}
         <div className="px-6">
-          <button>
+          <button
+            onClick={() =>
+              (window.location = "https://www.instagram.com/knighthacks/")
+            }
+          >
             <FaInstagram color="white" size={"40px"} />
           </button>
         </div>
         <div className="px-6">
-          <button>
+          <button
+            onClick={() =>
+              (window.location = "https://twitter.com/knighthacks/")
+            }
+          >
             <FaTwitter color="white" size={"40px"} />
           </button>
         </div>
         <div className="px-6">
-          <button>
+          <button
+            onClick={() =>
+              (window.location = "https://www.facebook.com/KnightHacks/")
+            }
+          >
             <FaFacebook color="white" size={"40px"} />
           </button>
         </div>
         <div className="px-6">
-          <button>
+          <button
+            onClick={() => (window.location = "https://discord.gg/Kv5g9vf")}
+          >
             <FaDiscord color="white" size={"40px"} />
           </button>
         </div>

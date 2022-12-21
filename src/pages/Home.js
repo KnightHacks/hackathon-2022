@@ -10,10 +10,10 @@ export default function Home() {
       <div className="flex justify-center w-full">
         <img src={Logo} className="h-20 mt-2" />
       </div>
-      <div className="flex mt-52 justify-end w-full">
+      <div className="flex w-full justify-center sm:justify-end sm:-ml-48 mt-32">
         <RegisterButton />
       </div>
-      <div className="flex mt-0 justify-end w-full pr-64">
+      <div className="flex w-full justify-center sm:justify-end mt-12 sm:-ml-48">
         <Stats />
       </div>
       <div className="flex justify-center w-full"></div>
