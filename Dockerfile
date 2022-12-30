@@ -14,4 +14,4 @@ COPY ./default.conf /etc/nginx/conf.d
 # copy web assets from build stage above
 COPY --from=build-env /app/build/. ./
 # expose is the same as listen directive in the nginx custom config.
-EXPOSE 9090
+EXPOSE 8080
