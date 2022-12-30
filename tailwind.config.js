@@ -9,6 +9,8 @@ module.exports = {
       backgroundColor: {
         eraser: "#ecd7ba",
         chalkborder: "#756136",
+        wallcolor: "#A8B592",
+        wallcolordark: "#828F6B",
       },
       borderColor: {
         chalkborder: "#756136",
@@ -22,6 +24,9 @@ module.exports = {
       dropShadow: {
         eraser: "6px -6px 0px #3C3C3C",
         eraserTwo: "-6px -6px 0px #3C3C3C",
+      },
+      textColor: {
+        wallcolor: "#A8B592",
       },
     },
   },

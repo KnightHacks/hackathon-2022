@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from "react";
 import ContentBox from "../components/ContentBox/ContentBox";
 import toast from "react-hot-toast";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import moment from "moment";
 
-export default function Register() {
-  useEffect(() => {
-    if (!localStorage.getItem("code") || !localStorage.getItem("state")) {
-      window.location.href = "/auth";
-    }
-  });
-
-  const fromTimestampToRfc3339Nano = (timestamp) => {
-    const nsReg = /(\d*)(\d{9})/;
-    const ts = String(timestamp).replace(nsReg, "$1");
-    const ns = String(timestamp).replace(nsReg, "$2");
-    if (
-      !timestamp ||
-      parseInt(timestamp) < 999999999 ||
-      !ts.length ||
-      !ns.length
-    ) {
-      return null;
-    }
-    return new Date(parseInt(ts + "000"))
-      .toISOString()
-      .replace(".000", `.${ns}`);
-  };
-
+export default function ModifyProfile() {
   const [registerPayload, setRegisterPayload] = useState({
     firstName: "",
     lastName: "",
@@ -62,34 +39,89 @@ export default function Register() {
     },
   });
 
-  const REGISTER = gql`
-    mutation Register(
-      $encryptedOAuthAccessToken: String!
-      $input: NewUser!
-      $provider: Provider!
-    ) {
-      register(
-        encryptedOAuthAccessToken: $encryptedOAuthAccessToken
-        input: $input
-        provider: $provider
-      ) {
-        accessToken
-        refreshToken
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+
+  const UPDATE_USER = gql`
+    mutation UpdateUser($updateUserId: ID!, $input: UpdatedUser!) {
+      updateUser(id: $updateUserId, input: $input) {
+        id
       }
     }
   `;
 
-  const [registerMutation, { data, error }] = useMutation(REGISTER, {
+  const [updateUser, { updateData, updateError }] = useMutation(UPDATE_USER, {
     variables: {
-      encryptedOAuthAccessToken: localStorage.getItem(
-        "encryptedOAuthAccessToken"
-      ),
+      updateUserId: parseJwt(localStorage.getItem("accessToken")).user_id,
       input: registerPayload,
-      provider: "GITHUB",
     },
   });
 
-  function register() {
+  const GET_USER = gql`
+    query Me {
+      me {
+        age
+        educationInfo {
+          graduationDate
+          level
+          major
+          name
+        }
+        email
+        firstName
+        gender
+        lastName
+        mailingAddress {
+          addressLines
+          city
+          country
+          postalCode
+          state
+        }
+        mlh {
+          codeOfConduct
+          sendMessages
+          shareInfo
+        }
+        phoneNumber
+        pronouns {
+          objective
+          subjective
+        }
+        race
+        shirtSize
+        yearsOfExperience
+      }
+    }
+  `;
+
+  const {
+    loading: userLoading,
+    error: userError,
+    data: userData,
+  } = useQuery(GET_USER);
+
+  function removeType(obj) {
+    for (const prop in obj) {
+      if (prop === "__typename") delete obj[prop];
+      else if (typeof obj[prop] === "object") removeType(obj[prop]);
+    }
+  }
+
+  function update() {
     setRegisterPayload({
       ...registerPayload,
       educationInfo: {
@@ -99,61 +131,48 @@ export default function Register() {
         ).format(),
       },
     });
-
-    console.log(moment(registerPayload.educationInfo.graduationDate).format());
-
-    //Check if all registerPayload fields are filled out
-    for (const [key, value] of Object.entries(registerPayload)) {
-      if (value == "") {
-        toast.error("Please fill out all fields");
-        return;
-      }
-    }
-
-    if (
-      registerPayload.mailingAddress.addressLines.length < 1 ||
-      registerPayload.mailingAddress.city == "" ||
-      registerPayload.mailingAddress.postalCode == "" ||
-      registerPayload.mailingAddress.state == ""
-    ) {
-      toast.error("Please fill out all address fields");
-      return;
-    }
-
-    //Check if all educationInfo fields are filled out
-    for (const [key, value] of Object.entries(registerPayload.educationInfo)) {
-      if (value == "") {
-        toast.error("Please fill out all education fields");
-        return;
-      }
-    }
-
-    if (!registerPayload.mlh.codeOfConduct) {
-      toast.error("Please agree to the MLH Code of Conduct");
-      return;
-    }
-
-    console.log(registerPayload);
-    registerMutation().then((res) => {
+    updateUser().then((res) => {
       console.log(res);
-      if (res.data.register.accessToken) {
-        localStorage.setItem("accessToken", res.data.register.accessToken);
-        localStorage.setItem("refreshToken", res.data.register.refreshToken);
-        toast.success("Successfully registered!");
-        window.location.href = "/dashboard";
-      }
     });
-    // window.location.href = "/apply";
   }
+
+  useEffect(() => {
+    console.log(parseJwt(localStorage.getItem("accessToken")));
+    if (userData?.me) {
+      var tempVar = { ...userData?.me };
+      console.log(tempVar);
+      // removeType(tempVar);
+      console.log(tempVar);
+      setRegisterPayload(tempVar);
+    }
+  }, [userLoading]);
 
   return (
     <ContentBox>
-      <h1 className="text-center font-bold text-4xl text-white">
-        Create Your KnightHacks Account
-      </h1>
+      <div className="flex justify-between">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="w-8 h-8 text-white cursor-pointer"
+          onClick={() => {
+            window.location.href = "/dashboard";
+          }}
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-4.28 9.22a.75.75 0 000 1.06l3 3a.75.75 0 101.06-1.06l-1.72-1.72h5.69a.75.75 0 000-1.5h-5.69l1.72-1.72a.75.75 0 00-1.06-1.06l-3 3z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <h1 className="text-center font-bold text-4xl text-white">
+          Modify your KnightHacks Profile
+        </h1>
+        <div></div>
+      </div>
       <br />
       <h1 className="text-center font-bold text-slate-400">
-        Create your account once and use it for all KnightHacks hackathons!
+        Change the information below to update your KnightHacks profile
       </h1>
 
       <form class="w-full">
@@ -594,7 +613,7 @@ export default function Register() {
             <input
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="graddate"
-              type="date"
+              type="datetime-local"
               placeholder="Graduation Date"
               value={registerPayload.educationInfo.graduationDate}
               onChange={(e) => {
@@ -662,9 +681,9 @@ export default function Register() {
             <button
               class="w-full bg-wallcolor hover:bg-wallcolordark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
-              onClick={register}
+              onClick={update}
             >
-              Continue to Hackathon Registration
+              Save Changes
             </button>
           </div>
         </div>

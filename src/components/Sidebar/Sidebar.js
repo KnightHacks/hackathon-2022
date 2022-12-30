@@ -44,7 +44,7 @@ function Sidebar(props) {
             </div>
           )}
         </button>
-        <div className="ml-6 mt-2">
+        <div className="ml-6 mt-2 hidden sm:block">
           <Music />
         </div>
       </div>
