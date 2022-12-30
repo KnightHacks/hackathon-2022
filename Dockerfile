@@ -1,11 +1,8 @@
 FROM node:18 AS build-env
 WORKDIR /app
 
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm ci --omit=dev
-
 COPY . ./
+RUN npm i --omit=dev
 RUN npm run build
 
 # stage - release ############
