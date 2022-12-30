@@ -11,7 +11,6 @@
     "apollo-upload-client": "^17.0.0",
     "fetch-cookie": "^2.1.0",
     "howler": "^2.2.3",
-    "knighthacks-api": "github:KnightHacks/knighthacks-api-js",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
