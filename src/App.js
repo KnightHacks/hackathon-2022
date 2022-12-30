@@ -58,9 +58,11 @@ function App() {
             </Link>
           </div>
           <div className="flex w-full justify-center gap-4 mt-8 border-chalkborder border-b-4 pb-1">
+            <Link to="/register">
             <button className="bg-eraser px-6 py-2 rounded-lg font-bold skew-y-0 hover:skew-y-2 eraserOne">
               Register Now
             </button>
+            </Link>
             <button className="bg-eraser px-6 py-2 rounded-lg font-bold -skew-y-0 hover:-skew-y-2 eraserTwo">
               Hacker Dashboard
             </button>
@@ -72,6 +74,7 @@ function App() {
           <Route path="/Sponsors" element={<Content page="sponsors" />} />
           <Route path="/About" element={<Content page="about" />} />
           <Route path="/FAQ" element={<Content page="faq" />} />
+          <Route path="/Register" element={<Content page="register" />} />
         </Routes>
       </BrowserRouter>
     </div>
