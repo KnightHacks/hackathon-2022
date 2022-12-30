@@ -2,6 +2,7 @@ import ContentBox from "../components/ContentBox/ContentBox";
 import { useQuery, useLazyQuery, gql } from "@apollo/client";
 import moment from "moment";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 export default function Dashboard() {
   const GET_HACKATHONS = gql`
@@ -60,25 +61,61 @@ export default function Dashboard() {
       },
     });
 
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+
   useEffect(() => {
+    if (localStorage.getItem("accessToken") == null) {
+      window.location.replace("/auth");
+    }
+  });
+
+  useEffect(() => {
+    const parsedJwt = parseJwt(localStorage.getItem("accessToken"));
+    const expirationDate = moment.unix(parsedJwt.exp);
+    const currentDate = moment();
+    const difference = expirationDate.diff(currentDate, "minutes");
+    console.log(difference);
     if (userError) {
       if (
         userError.message.includes("token is expired by") &&
         localStorage.getItem("refreshToken") !== null
       ) {
-        refreshJwt().then((data) => {
-          console.log(data);
-          //   localStorage.setItem("accessToken", data.data.refreshJWT);
-        });
+        console.log(parseJwt(localStorage.getItem("accessToken")));
+        if (difference < 5) {
+          refreshJwt()
+            .then((data) => {
+              localStorage.setItem("accessToken", data.data.refreshJWT);
+            })
+            .catch((error) => {
+              localStorage.removeItem("accessToken");
+              localStorage.removeItem("refreshToken");
+              window.location.replace("/auth");
+              toast.error("Your session has expired. Please log in again.");
+              console.log(error);
+            });
+        }
+      } else {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.replace("/auth");
+        toast.error("Your session has expired. Please log in again.");
       }
     }
   }, [userError]);
-
-  useEffect(() => {
-    if (localStorage.getItem("accessToken") === null) {
-      window.location.replace("/auth");
-    }
-  });
 
   return (
     <ContentBox>
@@ -104,6 +141,11 @@ export default function Dashboard() {
       {error && (
         <p className="text-white text-center text-xl mt-20">
           Error: {error.message}
+        </p>
+      )}
+      {data && data.hackathons.length === 0 && (
+        <p className="text-white text-center text-xl mt-20">
+          There are no upcoming KnightHacks events.
         </p>
       )}
       {data &&

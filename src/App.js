@@ -97,10 +97,12 @@ function App() {
                   onClick={() => {
                     localStorage.removeItem("code");
                     localStorage.removeItem("state");
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
                     window.location.reload();
                   }}
                 >
-                  <Link to="/register">
+                  <Link to="/auth">
                     <button className="bg-eraser px-6 py-2 rounded-lg font-bold skew-y-0 hover:skew-y-2 eraserOne">
                       Sign Out
                     </button>

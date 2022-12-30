@@ -39,6 +39,22 @@ export default function ModifyProfile() {
     },
   });
 
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
+
+    return JSON.parse(jsonPayload);
+  }
+
   const UPDATE_USER = gql`
     mutation UpdateUser($updateUserId: ID!, $input: UpdatedUser!) {
       updateUser(id: $updateUserId, input: $input) {
@@ -49,7 +65,7 @@ export default function ModifyProfile() {
 
   const [updateUser, { updateData, updateError }] = useMutation(UPDATE_USER, {
     variables: {
-      id: 1,
+      updateUserId: parseJwt(localStorage.getItem("accessToken")).user_id,
       input: registerPayload,
     },
   });
@@ -98,6 +114,13 @@ export default function ModifyProfile() {
     data: userData,
   } = useQuery(GET_USER);
 
+  function removeType(obj) {
+    for (const prop in obj) {
+      if (prop === "__typename") delete obj[prop];
+      else if (typeof obj[prop] === "object") removeType(obj[prop]);
+    }
+  }
+
   function update() {
     setRegisterPayload({
       ...registerPayload,
@@ -114,8 +137,15 @@ export default function ModifyProfile() {
   }
 
   useEffect(() => {
-    console.log(userData?.me);
-  }, []);
+    console.log(parseJwt(localStorage.getItem("accessToken")));
+    if (userData?.me) {
+      var tempVar = { ...userData?.me };
+      console.log(tempVar);
+      // removeType(tempVar);
+      console.log(tempVar);
+      setRegisterPayload(tempVar);
+    }
+  }, [userLoading]);
 
   return (
     <ContentBox>

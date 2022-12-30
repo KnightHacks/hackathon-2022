@@ -38,26 +38,44 @@ export default function HackathonApplication() {
     },
   });
 
+  const UPLOAD_RESUME = gql`
+    mutation ($file: Upload!) {
+      singleUpload(file: $file) {
+        id
+      }
+    }
+  `;
+
+  const [uploadResume] = useMutation(UPLOAD_RESUME, {
+    variables: {
+      file: applyPayload.resume,
+    },
+  });
+
   function apply() {
+    console.log(applyPayload);
+    uploadResume().then((data) => {
+      console.log(data);
+    });
     // for (const [key, value] of Object.entries(applyPayload)) {
     //   if (key !== "resume" && value == "") {
     //     toast.error("Please fill out all fields");
     //     return;
     //   }
     // }
-    applyToHackathon()
-      .then((data) => {
-        if (data.data.applyToHackathon == true) {
-          setSuccesfullyApplied("SUCCESS");
-        } else {
-          setSuccesfullyApplied("FAIL");
-        }
-      })
-      .catch((error) => {
-        setSuccesfullyApplied("FAIL");
-        toast.error("Something went wrong: " + error);
-      });
-    console.log(data);
+    // applyToHackathon()
+    //   .then((data) => {
+    //     if (data.data.applyToHackathon == true) {
+    //       setSuccesfullyApplied("SUCCESS");
+    //     } else {
+    //       setSuccesfullyApplied("FAIL");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setSuccesfullyApplied("FAIL");
+    //     toast.error("Something went wrong: " + error);
+    //   });
+    // console.log(data);
   }
 
   useEffect(() => {
@@ -143,12 +161,14 @@ export default function HackathonApplication() {
       <h1 className="text-center font-bold text-4xl text-white">
         KnightHacks{" "}
         {
-          data?.hackathons.filter((hackathon) => hackathon.id == hackathonId)[0]
-            .term.semester
+          data?.hackathons?.filter(
+            (hackathon) => hackathon.id == hackathonId
+          )[0]?.term.semester
         }{" "}
         {
-          data?.hackathons.filter((hackathon) => hackathon.id == hackathonId)[0]
-            .term.year
+          data?.hackathons?.filter(
+            (hackathon) => hackathon.id == hackathonId
+          )[0]?.term.year
         }{" "}
       </h1>
       <br />

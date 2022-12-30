@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import makeFetchCookie from "fetch-cookie";
+import { toast } from "react-hot-toast";
 
 const fetchCookie = makeFetchCookie(
   fetch,
@@ -62,7 +63,11 @@ export default function AuthRedirect() {
     const state = urlParams.get("state");
     localStorage.setItem("state", state);
     login().then((res) => {
-      console.log(res);
+      if (res.error) {
+        toast.error(
+          "Error logging in. Please try again. If the problem persists, please contact team@knighthacks.com with the error message below"
+        );
+      }
       if (res.data) {
         if (!res.data.login.accountExists) {
           localStorage.setItem(
@@ -81,9 +86,13 @@ export default function AuthRedirect() {
 
   return (
     <div className="flex justify-center align-middle h-full">
-      <h1 className="flex align-middle mt-64 font-bold text-3xl">
-        Redirecting you to the Dashboard...
-      </h1>
+      <div>
+        <h1 className="flex align-middle mt-64 font-bold text-3xl">
+          Redirecting you to the Dashboard...
+        </h1>
+        {loading && <p className="text-center mt-4">Loading...</p>}
+        {error && <p className=" text-center mt-4">Error: {error.message} </p>}
+      </div>
     </div>
   );
 }

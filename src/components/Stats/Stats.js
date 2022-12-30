@@ -2,7 +2,7 @@ import React from "react";
 
 // inputs can be grabbed from back-end
 // just some test values right now
-let val1 = 100;
+let val1 = 300;
 let val2 = 20;
 let baseTimeout = 20;
 
