@@ -12,6 +12,22 @@ cd hackathon-2022
 npm install
 ```
 
+## Setup Environment Variables
+
+Create a .env file declaring the API_ENDPOINT and OAUTH_AUTH_REDIRECT variables. 
+
+API_ENDPOINT is the url pointing to the backend you are using.
+
+OAUTH_AUTH_REDIRECT is the url that your application should return to after completing Github oAuth.
+
+Example: 
+
+.env
+```
+API_ENDPOINT=http://localhost:4000
+OAUTH_AUTH_REDIRECT=http://localhost:3000/auth_redirect
+```
+
 ## Getting Started
 
 To run a live development server, run the following in a terminal:
