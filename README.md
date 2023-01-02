@@ -14,11 +14,11 @@ npm install
 
 ## Setup Environment Variables
 
-Create a .env file declaring the API_ENDPOINT and OAUTH_AUTH_REDIRECT variables. 
+Create a .env file declaring the REACT_APP_API_ENDPOINT and REACT_APP_OAUTH_AUTH_REDIRECT variables. 
 
-API_ENDPOINT is the url pointing to the backend you are using.
+REACT_APP_API_ENDPOINT is the url pointing to the backend you are using.
 
-OAUTH_AUTH_REDIRECT is the url that your application should return to after completing Github oAuth.
+REACT_APP_OAUTH_AUTH_REDIRECT is the url that your application should return to after completing Github oAuth.
 
 Example: 
 
