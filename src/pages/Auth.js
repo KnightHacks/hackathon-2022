@@ -6,8 +6,8 @@ import makeFetchCookie from "fetch-cookie";
 
 export default function Auth() {
   const GET_AUTH_LINK = gql`
-    query Request($provider: Provider!) {
-      getAuthRedirectLink(provider: $provider)
+    query Query($provider: Provider!, $redirect: String) {
+      getAuthRedirectLink(provider: $provider, redirect: $redirect)
     }
   `;
 
@@ -16,6 +16,7 @@ export default function Auth() {
     {
       variables: {
         provider: "GITHUB",
+        redirect: process.env.REACT_APP_OAUTH_AUTH_REDIRECT,
       },
     }
   );

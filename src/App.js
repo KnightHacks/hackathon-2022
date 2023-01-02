@@ -41,7 +41,7 @@ function App() {
   // const uploadLink = createUploadLink({ uri: "http://localhost:4000" });
 
   const link = createHttpLink({
-    uri: "https://api-dev.knighthacks.org/",
+    uri: process.env.REACT_APP_API_ENDPOINT,
     credentials: "include",
   });
 
