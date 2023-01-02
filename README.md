@@ -24,8 +24,8 @@ Example:
 
 .env
 ```
-API_ENDPOINT=http://localhost:4000
-OAUTH_AUTH_REDIRECT=http://localhost:3000/auth_redirect
+REACT_APP_API_ENDPOINT=http://localhost:4000
+REACT_APP_OAUTH_AUTH_REDIRECT=http://localhost:3000/auth_redirect
 ```
 
 ## Getting Started
